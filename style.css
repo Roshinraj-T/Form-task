@@ -1,0 +1,19 @@
+ .message,.email,.name,.add{
+    margin: 20px;
+    text-align: center;
+}
+#id{
+    display: none;
+}
+ form{
+    text-align: center;
+    margin: 20px;
+} 
+table{
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+}
+ th,td{
+    border: 1px solid ;
+}

@@ -1,0 +1,124 @@
+// function clickbutton(){
+//   console.log("y");
+//     const name = document.getElementById('name').value;
+//     const email = document.getElementById('email').value;
+//     const message = document.getElementById('message').value;
+
+// }
+
+
+// const express = require("express");
+
+// app=express()
+// app.use(express.json())
+// var mysql      = require('mysql');
+// var connection = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : 'roshin',
+//   password : 'Dream@123',
+//   database : 'form'
+// });
+// connection.connect();
+ 
+
+
+
+function createuser(){
+
+   fetch('http://127.0.0.1:5500/index.html', {
+  
+   method: 'POST',
+  
+   body: JSON.stringify({
+  
+   Nmaeid: document.getElementById("title").value,
+  
+   Emailid: document.getElementById("body").value,
+  
+   messageid: document.getElementById("userid").value,
+   }),
+   headers: {
+  
+   'Content-type': 'application/json; charset=UTF-8',
+  
+   },
+  
+  })
+  
+   .then((response) => response.json())
+  
+   .then((json) => console.log(json));
+  
+  }
+   <!-- <script>
+
+// const appbtn=document.getElementById('btn');
+
+
+function clickbutton(){
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const data=""
+    console.log(name+'-'+email+'-'+message); 
+    // app.get('/',(req,res)=>{
+    //     connection.query("insert into contact (contacname,email,message) values (?,?,)",[name,email,message],function(error,results){
+    //         if(error){
+    //             console.log(error);
+    //         }
+    //        res.json(results)
+    //     })
+    // });
+    JSON.stringify({name,email,message})
+}
+   
+const express = require("express");
+
+app=express()
+app.use(express.json())
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'roshin',
+  password : 'Dream@123',
+  database : 'form'
+});
+connection.connect();
+app.post('/',(req,res)=>{
+    const name1 = req.body.name;
+  const email2 = req.body.email;
+  const message3 = req.body.message;
+        connection.query("insert into contact (contacname,email,message) values (?,?,)",[name1,email2,message3],function(error,results){
+            if(error){
+                console.log(error);
+            }
+           res.json(results)
+        })
+    });
+    app.app.listen(3000, function() {
+  console.log('Server listening on port 3000.');
+});
+// console.log(name);
+
+ </script> -->
+
+
+
+     <!-- <div class="mypage">
+    <div class="form">
+        <div class="name">
+            <h3>Name:</h3>
+            <input id="name" type="text">
+        </div>
+        <div class="email">
+            <h3>Email:</h3>
+            <input id="email" type="text">
+        </div>
+        <div class="message">
+            <h3>Message:</h3>
+            <input id="message" type="text">
+        </div>
+        <div class="add">
+            <button id="btn" onclick="clickbutton()">Add</button>
+        </div>           
+    </div> -->
