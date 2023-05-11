@@ -12,14 +12,14 @@ app.use(express.json())
 });
 connection.connect();
 // ======================get================================
-app.get('/',(req,res)=>{
-    connection.query('SELECT * from contact', function (error, results) {
-  if (error) {
-     console.log(error);
-  }
-  res.json(results)
-  });
-  })
+// app.get('/',(req,res)=>{
+//     connection.query('SELECT * from contact', function (error, results) {
+//   if (error) {
+//      console.log(error);
+//   }
+//   res.json(results)
+//   });
+//   })
   // ========================insert================================
 app.post('/insert',(req,res)=>{
     connection.query('insert into contact (contactname,email,message) values(?,?,?)',[req.body.contactname,req.body.email,req.body.message],function (error, results) {
@@ -47,6 +47,7 @@ app.put('/update',(req,res)=>{
       res.json(results)
   })  
 });
+// ================get=================
 app.get('/get',(req,res)=>{
   connection.query('select * from contact where is_active=1 ',function (error, results) {
     if (error) {

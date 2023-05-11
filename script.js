@@ -1,4 +1,5 @@
  var passvalue=''
+ window.onload=getdata() 
 //  location.reload(getdata())
   // ==============function for insertdata============================
   function insertdata(){
@@ -12,13 +13,14 @@
         headers: {       
         'Content-type': 'application/json; charset=UTF-8',       
         },       
-       })       
+       })    
         .then((response) => response.json())       
         .then((json) => console.log(json));
          document.getElementById("Nameid").value='';      
          document.getElementById("Emailid").value='';      
          document.getElementById("messageid").value='';
         //  location.reload() 
+        window.onload=getdata()
         // get();
     }
     // =============funtion for update=============
@@ -40,6 +42,7 @@
         document.getElementById("Nameid").value='';      
         document.getElementById("Emailid").value='';      
         document.getElementById("messageid").value='';
+        window.onload=getdata() 
         // location.reload() 
         // get();
     }
@@ -57,7 +60,7 @@
   // document.getElementById("change").innerHTML="update";
   //   }
     // code to fetch data and show in a front end
-   var calldata= function getdata(){
+   function getdata(){
    fetch('http://localhost:3000/get')
     .then(response => response.json())
     .then(json => {
@@ -71,11 +74,13 @@
           </tr>`
         });
         document.getElementById('data').innerHTML=html
+        document.getElementById('add').style.display="block"
+        document.getElementById("update").style.display="none";
         console.log(html)
     })
    
   }
- calldata();
+//  calldata();
 // let checkIdnumber= document.getElementById("data")[0].innerHTML
 // console.log(checkIdnumber);
     // ===========function for delete==============
@@ -92,7 +97,8 @@
        })       
         .then((response) => response.json())       
         .then((json) => console.log(json));
-        //  getdata();
+        window.onload=getdata() ;
+                //  getdata();
         // calldata();
       //  this.calldata()
         // this.calldata();
