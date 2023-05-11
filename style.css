@@ -2,6 +2,13 @@
     margin: 20px;
     text-align: center;
 }
+#update{
+    display: none;
+}
+.button{
+    display: flex;
+    justify-content: center;
+}
 #id{
     display: none;
 }

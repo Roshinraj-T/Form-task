@@ -39,14 +39,25 @@ app.put('/update',(req,res)=>{
      });
   })
   // ==================delete=======================
-  app.delete('/delete',(req,res)=>{
-    connection.query('delete from contact where id=?',[req.body.id],function (error, results) {
+  app.put('/delete',(req,res)=>{
+    connection.query('update contact set is_active=? where id=?',[req.body.is_active,req.body.id],function (error, results) {
       if (error) {
           console.log(error);
       }
       res.json(results)
-  })
+  })  
 });
+app.get('/get',(req,res)=>{
+  connection.query('select * from contact where is_active=1 ',function (error, results) {
+    if (error) {
+        console.log(error);
+    }
+    res.json(results)
+})  
+});
+
+
+//========================== port listening===================
 app.listen(3000,()=>{
 
     console.log("listening port 3000")

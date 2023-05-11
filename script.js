@@ -1,5 +1,5 @@
-
  var passvalue=''
+//  location.reload(getdata())
   // ==============function for insertdata============================
   function insertdata(){
       fetch('http://localhost:3000/insert', {      
@@ -18,9 +18,11 @@
          document.getElementById("Nameid").value='';      
          document.getElementById("Emailid").value='';      
          document.getElementById("messageid").value='';
+        //  location.reload() 
+        // get();
     }
     // =============funtion for update=============
-    function updatedata(idnumber){      
+    function updatedata(){      
       fetch('http://localhost:3000/update', {      
         method: 'put',       
         body: JSON.stringify({
@@ -38,21 +40,25 @@
         document.getElementById("Nameid").value='';      
         document.getElementById("Emailid").value='';      
         document.getElementById("messageid").value='';
+        // location.reload() 
+        // get();
     }
     // ====================function for editdata==========
     function editdata(id,contactname,email,message){
       document.getElementById("Nameid").value=contactname;
       document.getElementById("Emailid").value=email;
       document.getElementById("messageid").value=message;
-      passvalue=id
-      
+      passvalue=id   
+      document.getElementById("add").style.display="none";
+      document.getElementById("update").style.display="block";
     }
     // function to change button
-    function changename(){
-  document.getElementById("change").innerHTML="update";
-    }
+  //   function changename(){
+  // document.getElementById("change").innerHTML="update";
+  //   }
     // code to fetch data and show in a front end
-    fetch('http://localhost:3000')
+   var calldata= function getdata(){
+   fetch('http://localhost:3000/get')
     .then(response => response.json())
     .then(json => {
         html=''
@@ -61,25 +67,60 @@
           `<tr>
               <td>${e.contactname}</td>
               <td>${e.email}</td>
-              <td><button type="button" onclick="editdata('${e.id}','${e.contactname}','${e.email}','${e.message}')"> <i class="fa-solid fa-pen-to-square"></i></button><button type="button" onclick="deletedata('${e.id}')"> <i class="fa-solid fa-trash"></i></button></td>
+              <td><button type="button" onclick="editdata('${e.id}','${e.contactname}','${e.email}','${e.message}')"> <i class="fa-solid fa-pen-to-square"></i></button><button type="button" onclick="deletedata('${e.id}','${e.is_active}')"> <i class="fa-solid fa-trash"></i></button></td>
           </tr>`
         });
+        document.getElementById('data').innerHTML=html
         console.log(html)
-  document.getElementById('data').innerHTML=html
     })
-
+   
+  }
+ calldata();
 // let checkIdnumber= document.getElementById("data")[0].innerHTML
 // console.log(checkIdnumber);
     // ===========function for delete==============
-    function deletedata(id){   
-      // if(id===document.getElementById("data"))
-      // fetch('http://localhost:3000/delete', {      
-      //   method: 'delete',       
+    function deletedata(id,is_active,calldata){ 
+      fetch('http://localhost:3000/delete', {      
+        method: 'put',       
+        body: JSON.stringify({
+          id:id,
+          is_active:"0"
+        }),
+        headers: {       
+        'Content-type': 'application/json; charset=UTF-8',       
+        },       
+       })       
+        .then((response) => response.json())       
+        .then((json) => console.log(json));
+        //  getdata();
+        // calldata();
+      //  this.calldata()
+        // this.calldata();
+        // get();
+        // location.reload()   
+             // getdata()
+        // fetch('http://localhost:3000/get')
+      //   .then(response => response.json())
+      //   .then(json => {
+      //       html=''
+      //       json.forEach(e => {
+      //           html+=
+      //         `<tr>
+      //             <td>${e.contactname}</td>
+      //             <td>${e.email}</td>
+      //             <td><button type="button" onclick="editdata('${e.id}','${e.contactname}','${e.email}','${e.message}')"> <i class="fa-solid fa-pen-to-square"></i></button><button type="button" onclick="deletedata('${e.id}','${e.is_active}')"> <i class="fa-solid fa-trash"></i></button></td>
+      //         </tr>`
+      //       });
+      //       console.log(html)
+      // document.getElementById('data').innerHTML=html
+      //   })
+      // is_active=0;
+      // console.log(is_active);
+      // fetch('http://localhost:3000/update', {      
+      //   method: 'put',       
       //   body: JSON.stringify({
-      //     id:document.getElementById("id").value,       
-      //     contactname: document.getElementById("Nameid").value,       
-      //     email: document.getElementById("Emailid").value,       
-      //     message: document.getElementById("messageid").value,
+      //     id:id,
+      //     is_active:0
       //   }),
       //   headers: {       
       //   'Content-type': 'application/json; charset=UTF-8',       
@@ -87,6 +128,25 @@
       //  })       
       //   .then((response) => response.json())       
       //   .then((json) => console.log(json));
+
+      // console.log(is_active);
+    // document.querySelectorAll("#table tbody tr")[id].style.display="none";
+    //  let deletedata= document.getElementsByTagName('tbody')[0];
+      // console.log(deletedata);
+      // if(id===document.getElementById("data"))
+
+      // fetch('http://localhost:3000/delete', {      
+      //   method: 'delete',       
+      //   body: JSON.stringify({
+      //     id:id             
+      //   }),
+      //   headers: {       
+      //   'Content-type': 'application/json; charset=UTF-8',       
+      //   },       
+      //  })       
+      //   .then((response) => response.json())       
+      //   .then((json) => console.log(json));
+
     }
 
 
