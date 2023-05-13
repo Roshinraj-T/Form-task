@@ -9,17 +9,30 @@ app.use(express.json())
   user     : 'root',
   password : 'Dream@123',
   database : 'form'
-});
+});app.get('/getbyid/:id',(req,res)=>{
+  connection.query('select id,contactname,')
+})
 connection.connect();
-// ======================get================================
-// app.get('/',(req,res)=>{
-//     connection.query('SELECT * from contact', function (error, results) {
-//   if (error) {
-//      console.log(error);
-//   }
-//   res.json(results)
-//   });
-//   })
+// ================get=================
+app.get('/get',(req,res)=>{
+  console.log('inside get');
+  connection.query('select * from contact where is_active=1',function (error, results) {
+    if (error) {
+        console.log(error);
+    }
+    res.json(results)
+})  
+});
+// ======================get for edit================================
+app.get('/edit/:id',(req,res)=>{
+  console.log('inside function');
+  connection.query('select id,contactname,email,message from contact where id=? and is_active=1',[req.params.id],(error,results)=>{
+    if(error){
+      console.log(error);
+    }
+    res.json(results)
+  })
+})
   // ========================insert================================
 app.post('/insert',(req,res)=>{
     connection.query('insert into contact (contactname,email,message) values(?,?,?)',[req.body.contactname,req.body.email,req.body.message],function (error, results) {
@@ -47,15 +60,8 @@ app.put('/update',(req,res)=>{
       res.json(results)
   })  
 });
-// ================get=================
-app.get('/get',(req,res)=>{
-  connection.query('select * from contact where is_active=1 ',function (error, results) {
-    if (error) {
-        console.log(error);
-    }
-    res.json(results)
-})  
-});
+
+
 
 
 //========================== port listening===================
